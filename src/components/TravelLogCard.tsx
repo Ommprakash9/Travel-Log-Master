@@ -9,17 +9,22 @@ interface TravelLog {
   location: string;
   date: string;
   description: string;
+  fullDescription: string;
   image: string;
   tags: string[];
   likes: number;
   views: number;
+  author?: string;
+  duration?: string;
+  highlights?: string[];
 }
 
 interface TravelLogCardProps {
   log: TravelLog;
+  onViewDetails: (log: TravelLog) => void;
 }
 
-const TravelLogCard = ({ log }: TravelLogCardProps) => {
+const TravelLogCard = ({ log, onViewDetails }: TravelLogCardProps) => {
   return (
     <Card className="group overflow-hidden shadow-card hover:shadow-hero transition-all duration-300 transform hover:scale-[1.02] bg-card/90 backdrop-blur-sm border-border/50">
       <div className="relative overflow-hidden">
@@ -35,7 +40,7 @@ const TravelLogCard = ({ log }: TravelLogCardProps) => {
           </Badge>
         </div>
         <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Button variant="outline-hero" size="sm">
+          <Button variant="outline-hero" size="sm" onClick={() => onViewDetails(log)}>
             View Details
           </Button>
         </div>
