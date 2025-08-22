@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { MapPin, Mail, Phone, Globe, Heart } from "lucide-react";
 import logoIcon from "@/assets/logo-icon.png";
+import { handleNavClick } from "@/lib/scroll";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -117,7 +118,12 @@ const Footer = () => {
               Join thousands of travelers and get travel tips, destination guides, and inspiration.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
-              <Button variant="hero" size="lg" className="w-full sm:w-auto">
+              <Button 
+                variant="hero" 
+                size="lg" 
+                className="w-full sm:w-auto"
+                onClick={() => handleNavClick("#add-log")}
+              >
                 <MapPin className="w-4 h-4" />
                 Get Started Free
               </Button>

@@ -245,6 +245,7 @@ const TravelLogsSection = () => {
   const [selectedTag, setSelectedTag] = useState("");
   const [selectedLog, setSelectedLog] = useState<TravelLog | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [visibleLogs, setVisibleLogs] = useState(6);
 
   const allTags = Array.from(new Set(mockTravelLogs.flatMap(log => log.tags)));
   
@@ -264,6 +265,10 @@ const TravelLogsSection = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedLog(null);
+  };
+
+  const handleLoadMore = () => {
+    setVisibleLogs(prev => prev + 6);
   };
 
   return (
@@ -323,7 +328,7 @@ const TravelLogsSection = () => {
 
         {/* Travel Logs Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredLogs.map((log, index) => (
+          {filteredLogs.slice(0, visibleLogs).map((log, index) => (
             <div
               key={log.id}
               className="animate-slide-up"
@@ -335,12 +340,18 @@ const TravelLogsSection = () => {
         </div>
 
         {/* Load More */}
-        <div className="text-center mt-12">
-          <Button variant="default" size="lg">
-            <MapPin className="w-4 h-4" />
-            Load More Adventures
-          </Button>
-        </div>
+        {visibleLogs < filteredLogs.length && (
+          <div className="text-center mt-12">
+            <Button 
+              variant="default" 
+              size="lg"
+              onClick={handleLoadMore}
+            >
+              <MapPin className="w-4 h-4" />
+              Load More Adventures
+            </Button>
+          </div>
+        )}
 
         {/* Travel Log Modal */}
         <TravelLogModal 

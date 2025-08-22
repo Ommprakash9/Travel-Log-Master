@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Users, Camera, Award } from "lucide-react";
+import { handleNavClick } from "@/lib/scroll";
 
 const AboutSection = () => {
   const features = [
@@ -91,10 +92,18 @@ const AboutSection = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="lg">
+              <Button 
+                variant="hero" 
+                size="lg"
+                onClick={() => handleNavClick("#add-log")}
+              >
                 Start Your Journey
               </Button>
-              <Button variant="outline" size="lg">
+              <Button 
+                variant="outline" 
+                size="lg"
+                onClick={() => handleNavClick("#blog")}
+              >
                 Learn More
               </Button>
             </div>

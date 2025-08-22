@@ -87,6 +87,7 @@ const mockBlogPosts: BlogPost[] = [
 
 const BlogSection = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [visiblePosts, setVisiblePosts] = useState(6);
   
   const categories = ["All", ...Array.from(new Set(mockBlogPosts.map(post => post.category)))];
   
@@ -96,6 +97,10 @@ const BlogSection = () => {
 
   const featuredPosts = filteredPosts.filter(post => post.featured);
   const regularPosts = filteredPosts.filter(post => !post.featured);
+
+  const handleLoadMore = () => {
+    setVisiblePosts(prev => prev + 6);
+  };
 
   return (
     <section id="blog" className="py-20 bg-background">
@@ -190,7 +195,7 @@ const BlogSection = () => {
 
         {/* Regular Posts */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {regularPosts.map((post, index) => (
+          {regularPosts.slice(0, visiblePosts).map((post, index) => (
             <Card
               key={post.id}
               className="group overflow-hidden shadow-card hover:shadow-hero transition-all duration-300 transform hover:scale-[1.02] bg-card/90 backdrop-blur-sm border-border/50 animate-slide-up"
@@ -235,11 +240,17 @@ const BlogSection = () => {
         </div>
 
         {/* Load More */}
-        <div className="text-center mt-12">
-          <Button variant="default" size="lg">
-            Load More Stories
-          </Button>
-        </div>
+        {visiblePosts < regularPosts.length && (
+          <div className="text-center mt-12">
+            <Button 
+              variant="default" 
+              size="lg"
+              onClick={handleLoadMore}
+            >
+              Load More Stories
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );

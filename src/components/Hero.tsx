@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { MapPin, Camera, Heart, Globe } from "lucide-react";
 import heroBackground from "@/assets/hero-bg.jpg";
+import { handleNavClick } from "@/lib/scroll";
 
 const Hero = () => {
   return (
@@ -36,11 +37,20 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button variant="hero" size="xl" className="group">
+            <Button 
+              variant="hero" 
+              size="xl" 
+              className="group"
+              onClick={() => handleNavClick("#add-log")}
+            >
               Start Your Travel Log
               <MapPin className="w-5 h-5 transition-transform group-hover:scale-110" />
             </Button>
-            <Button variant="outline-hero" size="lg">
+            <Button 
+              variant="outline-hero" 
+              size="lg"
+              onClick={() => handleNavClick("#logs")}
+            >
               Explore Destinations
             </Button>
           </div>
