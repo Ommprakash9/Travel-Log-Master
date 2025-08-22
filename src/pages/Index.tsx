@@ -4,6 +4,9 @@ import TravelLogsSection from "@/components/TravelLogsSection";
 import AddTravelLogForm from "@/components/AddTravelLogForm";
 import BlogSection from "@/components/BlogSection";
 import AboutSection from "@/components/AboutSection";
+import CommunitySection from "@/components/CommunitySection";
+import ExploreSection from "@/components/ExploreSection";
+import SupportSection from "@/components/SupportSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -15,6 +18,9 @@ const Index = () => {
       <TravelLogsSection />
       <AddTravelLogForm />
       <BlogSection />
+      <ExploreSection />
+      <CommunitySection />
+      <SupportSection />
       <Footer />
     </div>
   );

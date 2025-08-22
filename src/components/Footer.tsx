@@ -8,22 +8,22 @@ const Footer = () => {
 
   const footerLinks = {
     explore: [
-      { name: "Popular Destinations", href: "#" },
-      { name: "Travel Guides", href: "#" },
-      { name: "Adventure Tips", href: "#" },
-      { name: "Photo Gallery", href: "#" }
+      { name: "Popular Destinations", href: "#explore" },
+      { name: "Travel Guides", href: "#explore" },
+      { name: "Adventure Tips", href: "#explore" },
+      { name: "Photo Gallery", href: "#explore" }
     ],
     community: [
-      { name: "Travel Stories", href: "#" },
-      { name: "Join Community", href: "#" },
-      { name: "Share Experience", href: "#" },
-      { name: "Travel Meetups", href: "#" }
+      { name: "Travel Stories", href: "#community" },
+      { name: "Join Community", href: "#community" },
+      { name: "Share Experience", href: "#community" },
+      { name: "Travel Meetups", href: "#community" }
     ],
     support: [
-      { name: "Help Center", href: "#" },
-      { name: "Contact Us", href: "#" },
-      { name: "Privacy Policy", href: "#" },
-      { name: "Terms of Service", href: "#" }
+      { name: "Help Center", href: "#support" },
+      { name: "Contact Us", href: "#support" },
+      { name: "Privacy Policy", href: "#support" },
+      { name: "Terms of Service", href: "#support" }
     ]
   };
 
@@ -64,12 +64,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.explore.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-background/80 hover:text-background transition-colors"
+                  <button
+                    onClick={() => handleNavClick(link.href)}
+                    className="text-background/80 hover:text-background transition-colors text-left"
                   >
                     {link.name}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -81,12 +81,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.community.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-background/80 hover:text-background transition-colors"
+                  <button
+                    onClick={() => handleNavClick(link.href)}
+                    className="text-background/80 hover:text-background transition-colors text-left"
                   >
                     {link.name}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -98,12 +98,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-background/80 hover:text-background transition-colors"
+                  <button
+                    onClick={() => handleNavClick(link.href)}
+                    className="text-background/80 hover:text-background transition-colors text-left"
                   >
                     {link.name}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
