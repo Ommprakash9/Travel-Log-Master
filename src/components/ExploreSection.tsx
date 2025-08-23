@@ -244,7 +244,16 @@ const ExploreSection = () => {
                     <span className="text-muted-foreground">Best: {destination.bestTime}</span>
                     <span className="font-medium">{destination.budget}</span>
                   </div>
-                  <Button variant="outline" size="sm" className="w-full">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full"
+                    onClick={() => {
+                      // Scroll to travel logs section to start planning
+                      const element = document.getElementById('travel-logs');
+                      element?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
                     <Plane className="w-4 h-4 mr-2" />
                     Plan Trip
                   </Button>
@@ -277,7 +286,14 @@ const ExploreSection = () => {
                       <span className="font-medium">Countries:</span> {guide.countries.join(", ")}
                     </div>
                   </div>
-                  <Button variant="default" className="w-full">
+                  <Button 
+                    variant="default" 
+                    className="w-full"
+                    onClick={() => {
+                      // Create a detailed guide view
+                      alert(`Opening ${guide.title}...\n\nThis comprehensive guide covers:\n• ${guide.description}\n• Duration: ${guide.duration}\n• Countries: ${guide.countries.join(", ")}\n• Difficulty: ${guide.difficulty}\n\nFor full interactive guides, connect Supabase for backend functionality!`);
+                    }}
+                  >
                     Read Full Guide
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -313,14 +329,36 @@ const ExploreSection = () => {
         {activeCategory === "gallery" && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {photoGallery.map((photo) => (
-              <Card key={photo.id} className="overflow-hidden hover:shadow-hero transition-all duration-300 transform hover:scale-[1.02] bg-card/90 backdrop-blur-sm border-border/50">
-                <div className="relative group">
+              <Card key={photo.id} className="overflow-hidden hover:shadow-hero transition-all duration-300 transform hover:scale-[1.02] bg-card/90 backdrop-blur-sm border-border/50 cursor-pointer">
+                <div 
+                  className="relative group"
+                  onClick={() => {
+                    // Open photo in full view
+                    const newWindow = window.open('', '_blank');
+                    if (newWindow) {
+                      newWindow.document.write(`
+                        <html>
+                          <head><title>${photo.title}</title></head>
+                          <body style="margin:0;background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh;">
+                            <div style="text-align:center;color:white;">
+                              <img src="${photo.image}" alt="${photo.title}" style="max-width:90vw;max-height:80vh;object-fit:contain;">
+                              <h2>${photo.title}</h2>
+                              <p>by ${photo.photographer} • ${photo.location}</p>
+                              <p>${photo.likes} likes</p>
+                            </div>
+                          </body>
+                        </html>
+                      `);
+                    }
+                  }}
+                >
                   <img src={photo.image} alt={photo.title} className="w-full h-64 object-cover" />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-end">
                     <div className="p-4 text-white w-full">
                       <h3 className="font-semibold text-sm">{photo.title}</h3>
                       <p className="text-xs text-gray-200">by {photo.photographer}</p>
                       <p className="text-xs text-gray-300">{photo.location}</p>
+                      <p className="text-xs text-gray-400 mt-1">Click to view full size</p>
                     </div>
                   </div>
                   <div className="absolute top-3 right-3 bg-black/50 rounded-full px-2 py-1 text-white text-xs flex items-center space-x-1">

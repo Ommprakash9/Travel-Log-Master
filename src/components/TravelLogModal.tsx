@@ -1,8 +1,9 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, MapPin, Heart, Eye, Share2, X } from "lucide-react";
-import { useState } from "react";
+import { Calendar, MapPin, Heart, Eye, Share2, X, Check } from "lucide-react";
+import { useState, useEffect } from "react";
+import { toast } from "sonner";
 
 interface TravelLog {
   id: string;
@@ -28,11 +29,66 @@ interface TravelLogModalProps {
 
 const TravelLogModal = ({ log, isOpen, onClose }: TravelLogModalProps) => {
   const [isLiked, setIsLiked] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    if (log) {
+      // Check if already liked/saved in localStorage
+      const savedLogs = JSON.parse(localStorage.getItem('savedTravelLogs') || '[]');
+      const likedLogs = JSON.parse(localStorage.getItem('likedTravelLogs') || '[]');
+      setIsSaved(savedLogs.includes(log.id));
+      setIsLiked(likedLogs.includes(log.id));
+    }
+  }, [log]);
 
   if (!log) return null;
 
   const handleLike = () => {
+    const likedLogs = JSON.parse(localStorage.getItem('likedTravelLogs') || '[]');
+    if (isLiked) {
+      const updated = likedLogs.filter((id: string) => id !== log.id);
+      localStorage.setItem('likedTravelLogs', JSON.stringify(updated));
+      toast.success("Removed from favorites");
+    } else {
+      likedLogs.push(log.id);
+      localStorage.setItem('likedTravelLogs', JSON.stringify(likedLogs));
+      toast.success("Added to favorites ❤️");
+    }
     setIsLiked(!isLiked);
+  };
+
+  const handleSave = () => {
+    const savedLogs = JSON.parse(localStorage.getItem('savedTravelLogs') || '[]');
+    if (isSaved) {
+      const updated = savedLogs.filter((id: string) => id !== log.id);
+      localStorage.setItem('savedTravelLogs', JSON.stringify(updated));
+      toast.success("Removed from saved list");
+    } else {
+      savedLogs.push(log.id);
+      localStorage.setItem('savedTravelLogs', JSON.stringify(savedLogs));
+      toast.success("Saved to your list! 📋");
+    }
+    setIsSaved(!isSaved);
+  };
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: log.title,
+          text: `Check out this amazing travel experience: ${log.description}`,
+          url: window.location.href,
+        });
+        toast.success("Shared successfully!");
+      } catch (err) {
+        console.log('Error sharing:', err);
+      }
+    } else {
+      // Fallback to copying to clipboard
+      const shareText = `Check out "${log.title}" in ${log.location}! ${log.description} - ${window.location.href}`;
+      await navigator.clipboard.writeText(shareText);
+      toast.success("Link copied to clipboard! 📋");
+    }
   };
 
   return (
@@ -139,12 +195,17 @@ const TravelLogModal = ({ log, isOpen, onClose }: TravelLogModalProps) => {
             </div>
             
             <div className="flex items-center space-x-2">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" onClick={handleShare}>
                 <Share2 className="w-4 h-4" />
                 Share
               </Button>
-              <Button variant="hero" size="sm">
-                Save to My List
+              <Button 
+                variant={isSaved ? "secondary" : "hero"} 
+                size="sm"
+                onClick={handleSave}
+              >
+                {isSaved ? <Check className="w-4 h-4 mr-2" /> : null}
+                {isSaved ? "Saved" : "Save to My List"}
               </Button>
             </div>
           </div>
