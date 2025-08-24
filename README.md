@@ -1,75 +1,45 @@
-# Welcome to your Lovable project
+# 🌍 Travel Log Master
 
-## Project info
+A modern web application to document and share your travel experiences.  
+Easily log destinations, add details, and keep all your journeys in one place with a clean, responsive UI.  
 
-**URL**: https://lovable.dev/projects/2ab6fb03-6816-492e-a0a0-d4ad5cd0b623
+🔗 **Live Demo**: [Travel Log Master](https://travel-log-master.vercel.app)
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🚀 Features
 
-**Use Lovable**
+- ✈️ Add and manage travel logs with ease  
+- 📸 Showcase your destinations with descriptions  
+- 📅 Organized view of past and upcoming trips  
+- 🎨 Modern UI with responsive design  
+- ⚡ Fast and optimized using Vite & React  
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/2ab6fb03-6816-492e-a0a0-d4ad5cd0b623) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ Tech Stack
 
-**Use your preferred IDE**
+- **React + TypeScript** – for scalable, modern frontend development  
+- **Vite** – lightning-fast build tool  
+- **Tailwind CSS** – utility-first styling for responsive layouts  
+- **shadcn/ui** – beautiful UI components  
+- **Vercel** – hosting & deployment  
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 📦 Installation & Setup
 
-Follow these steps:
+Follow these steps to run the project locally:
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+```bash
+# Step 1: Clone the repository
+git clone https://github.com/Ommprakash9/Travel-Log-Master.git
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Step 2: Navigate into the project folder
+cd Travel-Log-Master
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Step 3: Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Step 4: Run the development server
 npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/2ab6fb03-6816-492e-a0a0-d4ad5cd0b623) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
-Commit test by Ommprakash9 🚀
-
